@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# This script can be used if the container is running in a loop, e.g. when using dev server
+## Server run
+#php bin/console server:run --env=dev -vvv 0.0.0.0:8000
+#echo "*** Server was stopped"
+#
+## Restart routine for php in container
+#while true; do
+#    # Do nothing if the pause file exists
+#    if [ ! -f /tmp/pause_php ]; then
+#        # Verify that php is not running
+#        PHP_SERVER_RUNNING=`ps aux | grep "/usr/bin/php -S" | grep -v "grep" | wc -l | tr -d '[[:space:]]'`
+#        if [ "_${PHP_SERVER_RUNNING}" == "_0" ]; then
+#            echo "*** Pause file removed, starting server again."
+#            php bin/console server:run --env=dev -vvv 0.0.0.0:8000
+#            echo "*** Server was stopped"
+#        fi
+#    fi
+#
+#    sleep 2
+#done
+
+echo "Removing 'paused'-flag file"
+rm -f /tmp/pause_php
+if [ $? -ne 0 ]; then
+    echo "Something went wrong"
+else
+    echo "Done."
+fi
