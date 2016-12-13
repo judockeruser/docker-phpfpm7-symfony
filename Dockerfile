@@ -3,13 +3,14 @@ MAINTAINER Stellan Nordenbro <stellan.nordenbro@ju.se>
 # Add IUS repository for PHP and update
 RUN yum localinstall -y https://centos7.iuscommunity.org/ius-release.rpm && yum update -y
 # Install PHP and modules
-RUN yum install -y php70u-cli php70u-fpm php70u-common
-RUN yum install -y php70u-mcrypt php70u-ldap php70u-mbstring \
-                   php70u-pdo php70u-pgsql php70u-pear php70u-pecl-apcu php70u-gd \
-                   php70u-intl php70u-bcmath php70u-devel php70u-process php70u-pspell  \
-                   php70u-recode  php70u-tidy php70u-xml php70u-xmlrpc php70u-opcache \
-                   php70u-json php70u-pecl-xdebug php70u-pecl-apcu \
+RUN yum install -y php71u-cli php71u-fpm php71u-common
+RUN yum install -y php71u-mcrypt php71u-ldap php71u-mbstring \
+                   php71u-pdo php71u-pgsql php71u-gd \
+                   php71u-intl php71u-bcmath php71u-process  \
+                   php71u-tidy php71u-xml php71u-xmlrpc \
+                   php71u-devel php71u-pspell php71u-recode php71u-opcache php71u-json \
                    git curl vim node npm make automake epel-release
+# Not yet supported php70u-pear php70u-pecl-apcu php70u-pecl-xdebug php70u-pecl-apcu \
 
 # Add postgres client
 RUN sed -i 's/RPM-GPG-KEY-CentOS-7/RPM-GPG-KEY-CentOS-7\nexclude=postgresql*/g' /etc/yum.repos.d/CentOS-Base.repo && \
@@ -20,7 +21,7 @@ RUN sed -i 's/RPM-GPG-KEY-CentOS-7/RPM-GPG-KEY-CentOS-7\nexclude=postgresql*/g' 
 ADD ./conf/symfony.ini /etc/php.d/10-symfony.ini
 
 # Install utilities (xdebug is used by CI and Dev
-RUN curl -o /usr/local/bin/phpunit https://phar.phpunit.de/phpunit-5.2.3.phar && chmod +x /usr/local/bin/phpunit
+RUN curl -o /usr/local/bin/phpunit https://phar.phpunit.de/phpunit-5.7.3.phar && chmod +x /usr/local/bin/phpunit
 RUN cd /usr/local/bin && curl -sS https://getcomposer.org/installer | php -- --filename=composer
 RUN npm install -g bower uglifyjs uglifycss grunt-cli
 
