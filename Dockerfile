@@ -9,8 +9,9 @@ RUN yum install -y php71u-mcrypt php71u-ldap php71u-mbstring \
                    php71u-intl php71u-bcmath php71u-process  \
                    php71u-tidy php71u-xml php71u-xmlrpc \
                    php71u-devel php71u-pspell php71u-recode php71u-opcache php71u-json \
+                   php71u-pecl-xdebug php71u-pecl-apcu \
                    git curl vim node npm make automake epel-release
-# Not yet supported php70u-pear php70u-pecl-apcu php70u-pecl-xdebug php70u-pecl-apcu \
+# Not yet supported php70u-pear  \
 
 # Add postgres client
 RUN sed -i 's/RPM-GPG-KEY-CentOS-7/RPM-GPG-KEY-CentOS-7\nexclude=postgresql*/g' /etc/yum.repos.d/CentOS-Base.repo && \
